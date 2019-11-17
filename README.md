@@ -51,14 +51,12 @@ module.exports = {
 };
 ```
 
-/\*
 This class is pretty simple, it has an optional parameter, a mapping function that will be handling the
 transformation of each data chunk.
 
 See below for an example of the mapping function expression we will be using. It extracts an 'id' and 'title'
 from a supplied json item. This will make a bit more sense when you see the JSON data provided. Note
 this function expression uses destructuring to extract the 'id' and 'title' properties.
-\*/
 
 ```javascript
 const mapping = function(x) {
