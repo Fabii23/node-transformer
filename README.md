@@ -57,18 +57,35 @@ module.exports = {
 };
 ```
 
-This class is pretty simple, it has an optional parameter, a mapping function that will be handling the
+This class above is pretty simple, it has an optional parameter, a mapping function that will be handling the
 transformation of each data chunk.
 
-See below for an example of the mapping function expression we will be using. It extracts an 'id' and 'title'
-from a supplied json item. This will make a bit more sense when you see the JSON data provided.
-This function expression uses destructuring to extract the 'id' and 'title' properties.
+See below for an example of the mapping function expression we will be using. It extracts an **id** and **title**
+from a supplied json item. This function expression uses destructuring to extract the 'id' and 'title' properties.
 
 ```javascript
 const mapping = function(x) {
   let { id, title } = x;
   return { id, title };
 };
+```
+
+Sample JSON
+
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+  },
 ```
 
 ## 2.) Create a class to encapsulate and handle file operations
