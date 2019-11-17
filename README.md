@@ -1,30 +1,30 @@
 # node-transformer
 
-## Real time data transformation with NodeJs
+## On the fly data manipulation with Node.js
 
-On the fly data manipulation can be achieved with NodeJs **stream.Transform** class. This class allows manipulation of
+On the fly data manipulation can be achieved with Node.js **stream.Transform** class. This class allows manipulation of
 data without having to read it all into memory.
 
 Transform streams are streams which read, process, manipulate, then output the data in its new form.
-Transform streams are Duplex streams, that implement both the Readable and Writeable interface.
+Transform streams are known as Duplex streams, Duplex streams implement both the Readable and Writeable interface.
 
 This Duplex property allows you to chain streams together to create complex processes by piping from one to the next.
+This example creates a simple transformer that will transform the content of a sample JSON file and output it to another file.
 
-This example creates a simple transformer that will transform the content of a JSON file and output it to another file.
-
-###Install instructions
+### Install instructions
 
 1. Open your favorite console and run the commands below
 2. npm install
 3. npm run dev
 
-Here is a birds eye overview of our module creation.
+## Application overview
 
-1. Create a module which extends stream.Transform.
-2. Create a module that will encapsulate and handle file operations.
-3. Create a module to execute the code.
+1. Create a Transformer class .
+2. Create a class to encapsulate and handle file operations.
+3. Create a utility class to start the transformation process.
+4. Create an entry point for our node application.
 
-## 1.) Transform module
+## 1.) Create a Transformer class
 
 ```javascript
 const Transform = require("stream").Transform;
@@ -71,7 +71,7 @@ const mapping = function(x) {
 };
 ```
 
-## 2.) File handler
+## 2.) Create a class to encapsulate and handle file operations
 
 ```javascript
 const Readable = require("stream").Readable;
@@ -155,25 +155,21 @@ class File extends EventEmitter {
 module.exports = File;
 ```
 
-## 3.) Execute our transformer
+## 3.) Create a utility class to start the transformation process
 
 ```javascript
 const fs = require("fs");
-const File = require("../../models/File/File");
+const File = require("./../handler/File");
 const path = require("path");
-const outputDataPath = path.resolve(__dirname, "outputData.json");
-const dataPath = path.resolve(__dirname, "data.json");
 
-const mapping = function(x) {
-  let { id, title } = x;
-  return { id, title };
+module.exports = async function() {
+  const outputDataPath = path.resolve(__dirname, "outputData.json");
+  const dataPath = path.resolve(__dirname, "./../data/data.json");
+
+  startReadableStreamFileReader(dataPath, outputDataPath);
 };
 
-module.exports = async function(app) {
-  startReadableStreamFileReader();
-};
-
-async function startReadableStreamFileReader() {
+async function startReadableStreamFileReader(dataPath, outputDataPath) {
   try {
     let file = new File(dataPath, fs);
     let fileExists = await file.fileExists();
@@ -189,8 +185,25 @@ async function startReadableStreamFileReader() {
       throw new Error("File does not exist");
     }
   } catch (err) {
-    //This should not happen, so halt the program
+    //This should not happen, so halt the program if an error occurs
     throw new Error(err);
   }
 }
 ```
+
+## 4.) Create an entry point for our node application
+
+const app = require("express")();
+const PORT = process.env.PORT || 3000;
+
+async function startServer() {
+//Use a loader to decrease the file size of you app entry
+await require("./loaders")();
+
+// Turn on that server!
+app.listen(PORT, () => {
+console.log(`App listening on port ${PORT}`);
+});
+}
+
+startServer();
