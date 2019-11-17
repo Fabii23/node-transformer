@@ -1,21 +1,30 @@
-# node-transformer
+# Node.js stream.Transform example
 
-## On the fly data manipulation with Node.js
+## On the fly data manipulation
 
-On the fly data manipulation can be achieved with Node.js **stream.Transform** class. This class allows manipulation of
-data without having to read it all into memory.
+Node.js provides a **stream.Transform** module that allows you manipulate and transform data. It provides the
+flexibility to operate on a data stream that may not be available all at once. Think of streams as a collection of
+data - just like an array or string. With **stream.Transform** you have the luxury of operating on a stream one chunk at a
+time. This is perfect for large amounts of data, streams coming from an external source, or for streams where the entire data set
+might not be available at once. Streaming one chunk at a time, means that you do not have to buffer all of the data into memory.
 
-Transform streams are streams which read, process, manipulate, then output the data in its new form.
-Transform streams are known as Duplex streams, Duplex streams implement both the Readable and Writeable interface.
+### TDLR;
 
-This Duplex property allows you to chain streams together to create complex processes by piping from one to the next.
-This example creates a simple transformer that will transform the content of a sample JSON file and output it to another file.
+- Transform streams are known as Duplex streams, Duplex streams implement both the Readable and Writeable interface. Meaning the
+  are both readable and writable.
+- Being Duplex allows you to chain streams together to create complex processes by piping from one to the next.
+
+---
+
+## This example creates a simple transformer that will transform the content of a sample JSON file and output it to another file.
 
 ### Install instructions
 
 1. Open your favorite console and run the commands below
 2. npm install
 3. npm run dev
+
+---
 
 ## Application overview
 
