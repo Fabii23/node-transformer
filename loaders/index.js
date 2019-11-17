@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = async function() {
   const outputDataPath = path.resolve(__dirname, "outputData.json");
-  const dataPath = path.resolve(__dirname, "data.json");
+  const dataPath = path.resolve(__dirname, "./../data/data.json");
 
   startReadableStreamFileReader(dataPath, outputDataPath);
 };

@@ -2,21 +2,27 @@
 
 ## Real time data transformation with NodeJs
 
-On the fly data manipulation can be achieved with NodeJs stream.Transform class. This class allows manipulation of
+On the fly data manipulation can be achieved with NodeJs **stream.Transform** class. This class allows manipulation of
 data without having to read it all into memory.
 
-Transform streams are stream which read data, process the data, manipulate it, then output the data in its new form.
-Transform stream are known as Duplex streams, which are simply streams that implement both the Readable and Writeable interface.
+Transform streams are streams which read, process, manipulate, then output the data in its new form.
+Transform streams are Duplex streams, that implement both the Readable and Writeable interface.
 
 This Duplex property allows you to chain streams together to create complex processes by piping from one to the next.
 
-In this post we will create a simple OO module that will transform the content of a json file and output it to another file.
+This example creates a simple transformer that will transform the content of a JSON file and output it to another file.
+
+###Install instructions
+
+1. Open your favorite console and run the commands below
+2. npm install
+3. npm run dev
 
 Here is a birds eye overview of our module creation.
 
-1.) Create a module which extends stream.Transform.
-2.) Create a module that will encapsulate and handle file operations.
-3.) Create a module to execute the code.
+1. Create a module which extends stream.Transform.
+2. Create a module that will encapsulate and handle file operations.
+3. Create a module to execute the code.
 
 ## 1.) Transform module
 
@@ -55,8 +61,8 @@ This class is pretty simple, it has an optional parameter, a mapping function th
 transformation of each data chunk.
 
 See below for an example of the mapping function expression we will be using. It extracts an 'id' and 'title'
-from a supplied json item. This will make a bit more sense when you see the JSON data provided. Note
-this function expression uses destructuring to extract the 'id' and 'title' properties.
+from a supplied json item. This will make a bit more sense when you see the JSON data provided.
+This function expression uses destructuring to extract the 'id' and 'title' properties.
 
 ```javascript
 const mapping = function(x) {
