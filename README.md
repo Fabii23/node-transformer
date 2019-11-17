@@ -85,7 +85,8 @@ Sample JSON
     "id": 2,
     "title": "qui est esse",
     "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-  },
+  }
+]
 ```
 
 ## 2.) Create a class to encapsulate and handle file operations
@@ -210,17 +211,18 @@ async function startReadableStreamFileReader(dataPath, outputDataPath) {
 
 ## 4.) Create an entry point for our node application
 
+```javascript
 const app = require("express")();
 const PORT = process.env.PORT || 3000;
 
 async function startServer() {
-//Use a loader to decrease the file size of you app entry
-await require("./loaders")();
+  //Use a loader to decrease the file size of you app entry
+  await require("./loaders")();
 
-// Turn on that server!
-app.listen(PORT, () => {
-console.log(`App listening on port ${PORT}`);
-});
+  // Turn on that server!
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
 }
-
 startServer();
+```
