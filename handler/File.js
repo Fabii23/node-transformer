@@ -1,6 +1,9 @@
 const EventEmitter = require("events");
 let { Transformer } = require("./../transformer/Transformer");
 
+/**
+ * 
+ */
 class File extends EventEmitter {
   constructor(path, fs) {
     super();
@@ -8,7 +11,7 @@ class File extends EventEmitter {
     this.fs = fs;
     this.content = null;
 
-    this.on("log", function() {
+    this.on("log", function () {
       console.log.apply(null, arguments);
     });
   }
@@ -29,7 +32,7 @@ class File extends EventEmitter {
   readFile() {
     this.emit("log", "[readFile]");
     return new Promise((resolve, reject) => {
-      this.fs.readFile(this.path, "utf8", function(err, contents) {
+      this.fs.readFile(this.path, "utf8", function (err, contents) {
         resolve(JSON.parse(contents));
       });
     });
@@ -61,7 +64,7 @@ class File extends EventEmitter {
         .on("end", () => {
           this.emit("log", "readable end event triggered ...");
         })
-        .on("error", function(err) {
+        .on("error", function (err) {
           reject(err);
         })
         .on("close", () => {
